@@ -21,8 +21,7 @@ sudo pacman -S firefox \
                 kodi \
                 mpv \
                 bleachbit \
-                i3lock \
-                gdebi
+                i3lock
 
 printf "\e[1m\e[33m"
 (read -p "

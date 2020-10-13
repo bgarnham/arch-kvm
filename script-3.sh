@@ -5,7 +5,10 @@
 echo -e "\e[1m\e[32mcreate new user 'user'\e[0m"
 useradd -mg wheel user
 
-echo -e "\e[1m\e[33mset 'user' password\e[0m"
+(echo -e "
+\e[1m\e[33m*******************
+set 'user' password
+*******************\e[0m")
 passwd user
 
 printf "\e[1m\e[33m"
