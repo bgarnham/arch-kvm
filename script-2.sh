@@ -11,6 +11,9 @@ read DEVICE
 echo "start ssh service"
 systemctl start sshd
 
+echo "adding 'PermitRootLogin yes' to etc/ssh/sshd_config"
+echo "PermitRootLogin yes" >> etc/ssh/sshd_config
+
 echo -e "\e[1m\e[32mcreate swap\e[0m"
 dd if=/dev/zero of=/swapfile bs=1G count=2 status=progress
 chmod 600 /swapfile

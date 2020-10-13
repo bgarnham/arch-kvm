@@ -79,3 +79,4 @@ cd /root/arch-kvm-main
 # to execute script-4 in /home/user
 ./script-4.sh
 ```
+You may want to delete "PermitRootLogin yes" from /etc/ssh/sshd_config
