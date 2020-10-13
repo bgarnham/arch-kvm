@@ -12,7 +12,7 @@ read -p "sudoers file: uncomment '%wheel ALL=(ALL) ALL' - press enter to continu
 
 EDITOR=vim visudo
 
-# copy script-4 and script-5 to /home/user and chown files to user
+# copy script-4 & script-5 to /home/user and chown files to user
 
 read -p "logging out. log in as 'user' and run script 5 - press enter to continue"
 
