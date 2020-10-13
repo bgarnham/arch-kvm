@@ -2,6 +2,12 @@
 
 # SCRIPT 2
 
+echo -e "\e[1m\e[32mdisplay filesystem\e[0m"
+lsblk
+
+printf "\e[1m\e[33menter device name to install to (vda, sda, hda):\e[0m "
+read DEVICE
+
 echo "start ssh service"
 systemctl start sshd
 
@@ -20,7 +26,7 @@ echo -e "\e[1m\e[32menable network manager\e[0m"
 systemctl enable NetworkManager
 
 echo -e "\e[1m\e[32mrun grub install\e[0m"
-grub-install /dev/vda
+grub-install /dev/${DEVICE}
 
 echo -e "\e[1m\e[32mgenerate grub config\e[0m"
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -47,5 +53,11 @@ ln -sf /usr/share/zoneinfo/America/Vancouver
 echo -e "\e[1m\e[32msync hardware clock\e[0m"
 hwclock --systohc
 
-read -p "run 'exit', 'umount -R /mnt', 'reboot' to main system then run script 3 - press enter to continue"
-
+printf "\e[1m\e[33m"
+(read -p "
+*************************************************************
+           run 'exit', 'umount -R /mnt', 'reboot'
+login to main system then run /root/arch-kvm-main/script-3.sh
+                   press enter to continue
+*************************************************************")
+printf "\e[0m "

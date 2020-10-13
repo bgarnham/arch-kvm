@@ -46,7 +46,7 @@ wget https://github.com/bgarnham/arch-virtualbox-auto-install/archive/main.zip
 unzip main.zip
 
 # enter scripts directory
-cd arch-virtualbox-auto-install-main
+cd arch-kvm-main
 
 # make scripts executable
 chmod +x script*
@@ -55,21 +55,8 @@ chmod +x script*
 ./script-1.sh
 
 # change into root directory
-cd root
-
-# download script archive
-wget https://github.com/bgarnham/arch-virtualbox-auto-install/archive/main.zip
-
-# unzip archive
-unzip main.zip
-
-# enter scripts directory
-cd arch-virtualbox-auto-install-main
-
-# make scripts executable
-chmod +x script*
+cd root/arch-kvm-main
 
 # run script 2
 ./script-2.sh
 ```
-

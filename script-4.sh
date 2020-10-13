@@ -2,24 +2,32 @@
 
 # SCRIPT 4
 
-echo -e "\e[1m\e[32mupdate mirror list\e[0m"
-sudo pacman -S reflector
-sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-reflector -c UnitedStates -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+echo -e "\e[1m\e[32minstall apps\e[0m"
+sudo pacman -S firefox \
+                gnome-terminal \
+                gnome-control-center \
+                kate \
+                catfish \
+                gnome-calculator \
+                gnome-system-monitor \
+                file-roller \
+                gwenview \
+                gimp \
+                transmission-gtk \
+                thunar \
+                libreoffice-fresh \
+                evince \
+                parole \
+                kodi \
+                mpv \
+                bleachbit \
+                i3lock \
+                gdebi
 
-echo -e "\e[1m\e[32minstall basic X\e[0m"
-sudo pacman -S xorg-server xterm xorg-xinit
-
-echo -e "\e[1m\e[32minstall cinnamon and budgie desktops\e[0m"
-sudo pacman -S cinnamon budgie-desktop
-
-echo -e "\e[1m\e[32minstall gdm\e[0m"
-sudo pacman -S gdm
-
-echo -e "\e[1m\e[32menable gdm\e[0m"
-sudo systemctl enable gdm
-
-read -p "run script 5 after reboot to install apps - press enter to continue"
-
-sudo reboot
-
+printf "\e[1m\e[33m"
+(read -p "
+************************************************
+ installation complete
+press enter to continue
+************************************************")
+printf "\e[0m "
