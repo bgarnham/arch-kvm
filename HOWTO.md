@@ -40,7 +40,7 @@ ip a
 pacman -Syy wget unzip
 
 # download script archive
-wget https://github.com/bgarnham/arch-virtualbox-auto-install/archive/main.zip
+wget https://github.com/bgarnham/arch-kvm/archive/main.zip
 
 # unzip archive
 unzip main.zip
@@ -54,9 +54,28 @@ chmod +x script*
 # run script 1
 ./script-1.sh
 
-# change into root directory
+# change into new script directory
 cd root/arch-kvm-main
 
 # run script 2
 ./script-2.sh
+
+# exit chroot
+exit
+
+# unmount /mnt
+umount -R /mnt
+
+# reboot system
+reboot
+
+#change to script directory
+cd /root/arch-kvm-main
+
+#run script-3
+./script-3.sh
+
+# after reboot, login as user and use terminal
+# to execute script-4 in /home/user
+./script-4.sh
 ```

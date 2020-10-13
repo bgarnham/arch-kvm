@@ -58,10 +58,10 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 printf "\e[1m\e[33m"
 (read -p "
-************************************************
-run /root/arch-kvm-main/script-2.sh after chroot
-            press enter to continue
-************************************************")
+***********************************************
+run root/arch-kvm-main/script-2.sh after chroot
+           press enter to continue
+***********************************************")
 printf "\e[0m "
 
 arch-chroot /mnt /bin/bash
