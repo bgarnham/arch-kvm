@@ -7,11 +7,12 @@ Create a new VM in Virtual Machine Manager as follows:
 * RAM: 6144M
 * Disk size: 20G
 * Processors: 2
-* Set CDROM to first boot priority
 * Set ISO File in CDROM source path
 * Network source: Bridge
 
 ### 2. Boot VM from ISO
+
+All steps to be done as root.
 
 ### 3. Setup Scripts
 
@@ -62,9 +63,6 @@ cd root/arch-kvm-main
 
 # exit chroot
 exit
-
-# unmount /mnt
-umount -R /mnt
 
 # reboot system
 reboot
