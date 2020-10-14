@@ -8,11 +8,11 @@ lsblk
 printf "\e[1m\e[33menter device name to install to (vda, sda, hda):\e[0m "
 read DEVICE
 
-echo "\e[1m\e[33mstart ssh service\e[0m"
+echo -e "\e[1m\e[33mstart ssh service\e[0m"
 systemctl systemctl start sshd
 
-echo "\e[1m\e[33madding 'PermitRootLogin yes' to etc/ssh/sshd_config\e[0m"
-echo "PermitRootLogin yes" >> etc/ssh/sshd_config
+echo -e "\e[1m\e[33madding 'PermitRootLogin yes' to /etc/ssh/sshd_config\e[0m"
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 echo -e "\e[1m\e[32mcreate swap\e[0m"
 dd if=/dev/zero of=/swapfile bs=1G count=2 status=progress
