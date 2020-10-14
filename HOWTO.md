@@ -2,7 +2,7 @@
 
 ### 1. Set up VM
 
-Create a new VM in VirtualBox as follows:
+Create a new VM in Virtual Machine Manager as follows:
 
 * RAM: 6144M
 * Disk size: 20G
