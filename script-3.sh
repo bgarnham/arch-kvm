@@ -56,7 +56,7 @@ You have the option of installing:
 
 printf "\e[1m\e[33m"
 while true; do
-    read -p "do you wish to install cinnamon?" yn
+    read -p "do you wish to install cinnamon? " yn
     case $yn in
         [Yy]* ) pacman -S cinnamon; break;;
         [Nn]* ) break;;
@@ -67,7 +67,7 @@ printf "\e[0m "
 
 printf "\e[1m\e[33m"
 while true; do
-    read -p "do you wish to install budgie?" yn
+    read -p "do you wish to install budgie? " yn
     case $yn in
         [Yy]* ) pacman -S budgie-desktop; break;;
         [Nn]* ) break;;
@@ -78,7 +78,7 @@ printf "\e[0m "
 
 printf "\e[1m\e[33m"
 while true; do
-    read -p "do you wish to install mate + mate apps?" yn
+    read -p "do you wish to install mate + mate apps? " yn
     case $yn in
         [Yy]* ) pacman -S mate mate-extra; break;;
         [Nn]* ) break;;
@@ -96,7 +96,7 @@ You have the option of installing:
 
 printf "\e[1m\e[33m"
 while true; do
-    read -p "do you wish to install gdm or lightdm?" dm
+    read -p "do you wish to install gdm or lightdm? " dm
     case $dm in
         gdm ) pacman -S gdm; systemctl enable gdm.service; break;;
         lightdm ) pacman -S lightdm; pacman -S lightdm-gtk-greeter; systemctl enable lightdm.service; break;;
