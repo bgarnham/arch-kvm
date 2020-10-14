@@ -59,7 +59,7 @@ hwclock --systohc
 printf "\e[1m\e[33m"
 (read -p "
 *************************************************************
-           run 'exit', 'umount -R /mnt', 'reboot'
+                    run 'exit', 'reboot'
 login to main system then run /root/arch-kvm-main/script-3.sh
                    press enter to continue
 *************************************************************")
