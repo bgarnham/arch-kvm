@@ -9,7 +9,7 @@ printf "\e[1m\e[33menter device name to install to (vda, sda, hda):\e[0m "
 read DEVICE
 
 echo "\e[1m\e[33mstart ssh service\e[0m"
-systemctl start sshd
+systemctl systemctl start sshd
 
 echo "\e[1m\e[33madding 'PermitRootLogin yes' to etc/ssh/sshd_config\e[0m"
 echo "PermitRootLogin yes" >> etc/ssh/sshd_config
