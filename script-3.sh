@@ -3,7 +3,7 @@
 # SCRIPT 3
 
 read -p "what username do you want?" USERNAME
-${USERNAME}
+
 echo -e "\e[1m\e[32mcreate new user 'user'\e[0m"
 useradd -mg wheel ${USERNAME}
 
