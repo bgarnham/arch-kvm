@@ -50,7 +50,7 @@ mount /dev/${DEVICE}1 /mnt/boot
 echo -e "\e[1m\e[32minstall base system\e[0m"
 pacstrap /mnt base base-devel linux linux-firmware vim openssh git wget unzip
 
-echo "\e[1m\e[32mcopy scripts to /root on new install\e[0m"
+echo -e "\e[1m\e[32mcopy scripts to /root on new install\e[0m"
 cp -r /root/arch-kvm-main /mnt/root/
 
 echo -e "\e[1m\e[32mgenerate fstab\e[0m"
