@@ -98,8 +98,8 @@ printf "\e[1m\e[33m"
 while true; do
     read -p "do you wish to install gdm or lightdm?" dm
     case $dm in
-        gdm ) pacman -S gdm; enable gdm; break;;
-        lightdm ) pacman -S lightdm; pacman -S lightdm-gtk-greeter; enable lightdm; break;;
+        gdm ) pacman -S gdm; systemctl enable gdm.service; break;;
+        lightdm ) pacman -S lightdm; pacman -S lightdm-gtk-greeter; systemctl enable lightdm.service; break;;
         [Nn]* ) break;;
         * ) echo "Please answer gdm, lightdm or no.";;
     esac
