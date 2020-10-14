@@ -74,9 +74,5 @@ cd /root/arch-kvm-main
 
 #run script-3
 ./script-3.sh
-
-# after reboot, login as user and use terminal
-# to execute script-4 in /home/user
-./script-4.sh
 ```
 You may want to delete "PermitRootLogin yes" from /etc/ssh/sshd_config
