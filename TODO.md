@@ -1,14 +1,21 @@
-* FAILED script 2 now has a systemctl start sshd, which hopefully works.... was required to manually start sshd after reboot
-* TEST corrected sshd service startup in script-2
-* aside from above, all seems to be working up until the optional installs. They still need to be tested
-* try replacing visudo in script-3 with sed
-* check the following worked correctly.
-  * echo "/swapfile none defaults 0 0" >> /dev/fstab
-  * sed -i 's/# en_US.UtF-8 UTF-8/en_US.UtF-8 UTF-8/g' /etc/locale.genfstab
-  * sed -i 's/# en_US ISO-8859-1/en_US ISO-8859-1/g' /etc/locale.genfstab
-  * echo archvb >> /etc/hostname
-  * genfstab -U /mnt >> /mnt/etc/fstab
-  * echo "/swapfile none defaults 0 0" >> /dev/fstab
+* Optional installs still need to be tested
+
+* rearranged script 1, check for problems
+
+* check swap setup for errors as it runs
+
+* after re-install, check the following worked correctly.
+  * /etc/fstab with /swapfile
+  * sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
+  * sed -i 's/#en_US ISO-8859-1/en_US ISO-8859-1/g' /etc/locale.gen
+  * systemctl enable sshd.service
+  * echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+  * ln -sf /usr/share/zoneinfo/America/Vancouver /etc/localtime
+  * sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/'
+  * added warning and cancel option in script-1 as drive will be overwritten
+  * PASS echo LANG=en_US.UTF-8 >> /etc/locale.conf
+  * PASS echo archvb >> /etc/hostname
+
 * considering
   lsblk | grep disk | awk -F" " '{print $1}'
   OR
@@ -16,4 +23,3 @@
   OR
   lsblk | grep disk | grep -o '^[^ ]\+'
   when asking to select drive. this should only the name only of only 'physical' drives, or so goes my theory
-* add warning and cancel option in script-1 as drive will be overwritten

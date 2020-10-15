@@ -7,21 +7,25 @@ BOLD="\e[1m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
 
+echo -e "${BOLD}${GREEN}use ntp time${RESET}"
+timedatectl set-ntp true
+
 echo -e "${BOLD}${GREEN}display filesystem${RESET}"
 lsblk
 
 printf "${BOLD}${YELLOW}enter device name to install to (vda, sda, hda):${RESET} "
 read DEVICE
 
-echo -e "${BOLD}${GREEN}use ntp time${RESET}"
-timedatectl set-ntp true
-
-echo -e "${BOLD}${GREEN}install reflector${RESET}"
-pacman -Syy reflector
-
-echo -e "${BOLD}${GREEN}update mirror list${RESET}"
-reflector -c 'United States' -a 6 --sort rate --save /etc/pacman.d/mirrorlist
-pacman -Syy
+while true; do
+    printf "${BOLD}${YELLOW}"
+    read -p "all data will be wiped from the device. Do you want to proceed? " yn
+    printf "${RESET}"
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "please answer yes or no.";;
+    esac
+done
 
 echo -e "${BOLD}${GREEN}partition drive${RESET}"
 (
@@ -51,6 +55,13 @@ echo -e "${BOLD}${GREEN}mount file systems${RESET}"
 mount /dev/${DEVICE}2 /mnt
 mkdir /mnt/boot
 mount /dev/${DEVICE}1 /mnt/boot
+
+echo -e "${BOLD}${GREEN}install reflector${RESET}"
+pacman -Syy reflector
+
+echo -e "${BOLD}${GREEN}update mirror list${RESET}"
+reflector -c 'United States' -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+pacman -Syy
 
 echo -e "${BOLD}${GREEN}install base system${RESET}"
 pacstrap /mnt base base-devel linux linux-firmware vim openssh git wget unzip

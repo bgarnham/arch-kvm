@@ -24,11 +24,10 @@ dd if=/dev/zero of=/swapfile bs=1G count=2 status=progress
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
-echo "" >> /dev/fstab
-echo "/swapfile none defaults 0 0" >> /dev/fstab
+echo "/swapfile none defaults 0 0" >> /etc/fstab
 
 echo -e "${BOLD}${GREEN}install network manager, grub, reflector, etc${RESET}"
-pacman -S networkmanager grub dialog reflector bash-completion man terminus-font
+pacman -S networkmanager grub dialog reflector bash-completion man terminus-font neofetch
 
 echo -e "${BOLD}${GREEN}enable network manager${RESET}"
 systemctl enable NetworkManager
@@ -43,8 +42,8 @@ echo -e "${BOLD}${GREEN}set root password${RESET}"
 passwd
 
 echo -e "${BOLD}${GREEN}uncomment locale options${RESET}"
-sed -i 's/# en_US.UtF-8 UTF-8/en_US.UtF-8 UTF-8/g' /etc/locale.genfstab
-sed -i 's/# en_US ISO-8859-1/en_US ISO-8859-1/g' /etc/locale.genfstab
+sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+sed -i 's/#en_US ISO-8859-1/en_US ISO-8859-1/' /etc/locale.gen
 
 echo -e "${BOLD}${GREEN}generate locale${RESET}"
 locale-gen
@@ -56,7 +55,10 @@ echo -e "${BOLD}${GREEN}set hostname${RESET}"
 echo archvb >> /etc/hostname
 
 echo -e "${BOLD}${GREEN}set timezone${RESET}"
-ln -sf /usr/share/zoneinfo/America/Vancouver
+ln -sf /usr/share/zoneinfo/America/Vancouver /etc/localtime
+
+echo -e "${BOLD}${GREEN}use ntp time${RESET}"
+timedatectl set-ntp true
 
 echo -e "${BOLD}${GREEN}sync hardware clock${RESET}"
 hwclock --systohc

@@ -12,22 +12,14 @@ read -p "what username do you want?" USERNAME
 echo -e "${BOLD}${GREEN}create new user ${USERNAME}${RESET}"
 useradd -mg wheel ${USERNAME}
 
-(echo -e "
-${BOLD}${YELLOW}************************
+(echo -e "${BOLD}${YELLOW}
+************************
 set ${USERNAME} password
 ************************${RESET}")
 passwd user
 
-printf "${BOLD}${YELLOW}"
-(read -p "
-*****************************************
-           now opening visudo
-uncomment '%wheel ALL=(ALL) ALL' and save
-         press enter to continue
-*****************************************")
-printf "${RESET}"
-
-EDITOR=vim visudo
+echo -e "${BOLD}${GREEN}add ${USERNAME} to sudoers${RESET}"
+sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/'
 
 echo -e "${BOLD}${GREEN}update mirror list${RESET}"
 pacman -S reflector
