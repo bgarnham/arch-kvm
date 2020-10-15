@@ -2,23 +2,28 @@
 
 # SCRIPT 1
 
-echo -e "\e[1m\e[32mdisplay filesystem\e[0m"
+RESET="\e[0m"
+BOLD="\e[1m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+
+echo -e "${BOLD}${GREEN}display filesystem${RESET}"
 lsblk
 
-printf "\e[1m\e[33menter device name to install to (vda, sda, hda):\e[0m "
+printf "${BOLD}${YELLOW}enter device name to install to (vda, sda, hda):${RESET} "
 read DEVICE
 
-echo -e "\e[1m\e[32muse ntp time\e[0m"
+echo -e "${BOLD}${GREEN}use ntp time${RESET}"
 timedatectl set-ntp true
 
-echo -e "\e[1m\e[32minstall reflector\e[0m"
+echo -e "${BOLD}${GREEN}install reflector${RESET}"
 pacman -Syy reflector
 
-echo -e "\e[1m\e[32mupdate mirror list\e[0m"
+echo -e "${BOLD}${GREEN}update mirror list${RESET}"
 reflector -c 'United States' -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 pacman -Syy
 
-echo -e "\e[1m\e[32mpartition drive\e[0m"
+echo -e "${BOLD}${GREEN}partition drive${RESET}"
 (
 echo o # clear the in memory partition table
 echo n # new partition
@@ -38,30 +43,30 @@ echo w # write the partition table
 echo q # and we're done
 ) | fdisk /dev/${DEVICE}
 
-echo -e "\e[1m\e[32mmake file systems\e[0m"
+echo -e "${BOLD}${GREEN}make file systems${RESET}"
 mkfs.ext4 /dev/${DEVICE}1
 mkfs.ext4 /dev/${DEVICE}2
 
-echo -e "\e[1m\e[32mmount file systems\e[0m"
+echo -e "${BOLD}${GREEN}mount file systems${RESET}"
 mount /dev/${DEVICE}2 /mnt
 mkdir /mnt/boot
 mount /dev/${DEVICE}1 /mnt/boot
 
-echo -e "\e[1m\e[32minstall base system\e[0m"
+echo -e "${BOLD}${GREEN}install base system${RESET}"
 pacstrap /mnt base base-devel linux linux-firmware vim openssh git wget unzip
 
-echo -e "\e[1m\e[32mcopy scripts to /root on new install\e[0m"
+echo -e "${BOLD}${GREEN}copy scripts to /root on new install${RESET}"
 cp -r /root/arch-kvm-main /mnt/root/
 
-echo -e "\e[1m\e[32mgenerate fstab\e[0m"
+echo -e "${BOLD}${GREEN}generate fstab${RESET}"
 genfstab -U /mnt >> /mnt/etc/fstab
 
-printf "\e[1m\e[33m"
+printf "${BOLD}${YELLOW}"
 (read -p "
 ***********************************************
 run root/arch-kvm-main/script-2.sh after chroot
            press enter to continue
 ***********************************************")
-printf "\e[0m "
+printf "${RESET} "
 
 arch-chroot /mnt /bin/bash

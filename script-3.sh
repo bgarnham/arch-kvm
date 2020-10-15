@@ -2,101 +2,107 @@
 
 # SCRIPT 3
 
+RESET="\e[0m"
+BOLD="\e[1m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+
 read -p "what username do you want?" USERNAME
 
-echo -e "\e[1m\e[32mcreate new user 'user'\e[0m"
+echo -e "${BOLD}${GREEN}create new user ${USERNAME}${RESET}"
 useradd -mg wheel ${USERNAME}
 
 (echo -e "
-\e[1m\e[33m*******************
+${BOLD}${YELLOW}************************
 set ${USERNAME} password
-*******************\e[0m")
+************************${RESET}")
 passwd user
 
-printf "\e[1m\e[33m"
+printf "${BOLD}${YELLOW}"
 (read -p "
 *****************************************
            now opening visudo
 uncomment '%wheel ALL=(ALL) ALL' and save
          press enter to continue
 *****************************************")
-printf "\e[0m "
+printf "${RESET}"
 
 EDITOR=vim visudo
 
-echo -e "\e[1m\e[32mupdate mirror list\e[0m"
+echo -e "${BOLD}${GREEN}update mirror list${RESET}"
 pacman -S reflector
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 reflector -c UnitedStates -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 
-(echo -e "\e[1m\e[33m
+(echo -e "${BOLD}${YELLOW}
 ***************************************
 You have the option of installing xorg
 it's required for a desktop environment
-***************************************\e[0m")
+***************************************${RESET}")
 
-printf "\e[1m\e[33m"
 while true; do
+    printf "${BOLD}${YELLOW}"
     read -p "do you wish to install xorg? " yn
+    printf "${RESET}"
     case $yn in
         [Yy]* ) pacman -S xorg-server xterm xorg-xinit; break;;
         [Nn]* ) break;;
         * ) echo "please answer yes or no.";;
     esac
 done
-printf "\e[0m "
 
-(echo -e "\e[1m\e[33m
+(echo -e "${BOLD}${YELLOW}
 **********************************
 You have the option of installing:
 1) cinnamon
 2) budgie
 3) mate
-**********************************\e[0m")
+**********************************${RESET}")
 
-printf "\e[1m\e[33m"
 while true; do
+    printf "${BOLD}${YELLOW}"
     read -p "do you wish to install cinnamon? " yn
+    printf "${RESET}"
     case $yn in
         [Yy]* ) pacman -S cinnamon; break;;
         [Nn]* ) break;;
         * ) echo "please answer yes or no.";;
     esac
 done
-printf "\e[0m "
 
-printf "\e[1m\e[33m"
 while true; do
+    printf "${BOLD}${YELLOW}"
     read -p "do you wish to install budgie? " yn
+    printf "${RESET}"
     case $yn in
         [Yy]* ) pacman -S budgie-desktop; break;;
         [Nn]* ) break;;
         * ) echo "please answer yes or no.";;
     esac
 done
-printf "\e[0m "
 
-printf "\e[1m\e[33m"
 while true; do
+    printf "${BOLD}${YELLOW}"
     read -p "do you wish to install mate + mate apps? " yn
+    printf "${RESET}"
     case $yn in
         [Yy]* ) pacman -S mate mate-extra; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
-printf "\e[0m "
 
-(echo -e "\e[1m\e[33m
+(echo -e "${BOLD}${YELLOW}
 **********************************
 You have the option of installing:
 1) gdm
 2) lightdm
-**********************************\e[0m")
+**********************************${RESET}")
 
-printf "\e[1m\e[33m"
 while true; do
+    printf "${BOLD}${YELLOW}"
     read -p "do you wish to install gdm or lightdm? " dm
+    printf "${RESET}"
     case $dm in
         gdm ) pacman -S gdm; systemctl enable gdm.service; break;;
         lightdm ) pacman -S lightdm; pacman -S lightdm-gtk-greeter; systemctl enable lightdm.service; break;;
@@ -104,35 +110,35 @@ while true; do
         * ) echo "Please answer gdm, lightdm or no.";;
     esac
 done
-printf "\e[0m "
 
-(echo -e "\e[1m\e[33m
+(echo -e "${BOLD}${YELLOW}
 ********************************************************************
 You have the option of installing the following software collection:
-firefox
-gnome-terminal
-gnome-control-center
-kate
-catfish
-gnome-calculator
-gnome-system-monitor
-file-roller
-gwenview
-gimp
-transmission
-thunar
-libreoffice
-evince
-parole
-kodi
-mpv
 bleachbit
+catfish
+evince
+file-roller
+firefox
+gimp
+gnome-calculator
+gnome-control-center
+gnome-system-monitor
+gnome-terminal
+gwenview
 i3lock
-********************************************************************\e[0m")
+kate
+kodi
+libreoffice
+mpv
+parole
+thunar
+transmission
+********************************************************************${RESET}")
 
-printf "\e[1m\e[33m"
 while true; do
-    read -p "do you wish to install the additional software?" yn
+    printf "${BOLD}${YELLOW}"
+    read -p "do you wish to install the additional software? " yn
+    printf "${RESET}"
     case $yn in
         [Yy]* ) pacman -S firefox \
                         gnome-terminal \
@@ -157,15 +163,14 @@ while true; do
         * ) echo "please answer yes or no.";;
     esac
 done
-printf "\e[0m "
 
-printf "\e[1m\e[33m"
+printf "${BOLD}${YELLOW}"
 (read -p "
 ***********************
  installation complete
 system will now reboot
 press enter to continue
 ***********************")
-printf "\e[0m "
+printf "${RESET}"
 
 reboot

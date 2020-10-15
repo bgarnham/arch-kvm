@@ -9,3 +9,11 @@
   * echo archvb >> /etc/hostname
   * genfstab -U /mnt >> /mnt/etc/fstab
   * echo "/swapfile none defaults 0 0" >> /dev/fstab
+* considering
+  lsblk | grep disk | awk -F" " '{print $1}'
+  OR
+  lsblk | grep disk | cut -d' ' -f1
+  OR
+  lsblk | grep disk | grep -o '^[^ ]\+'
+  when asking to select drive. this should only the name only of only 'physical' drives, or so goes my theory
+* add warning and cancel option in script-1 as drive will be overwritten
